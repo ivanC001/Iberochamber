@@ -1,0 +1,453 @@
+/* ===================================================================
+   IBERO CHAMBER — Hoja de marca
+   Se carga DESPUÉS de style.css (plantilla Stadum). No sustituye a la
+   plantilla: le aplica la paleta de Ibero Chamber y da forma al
+   contenido migrado del WordPress.
+   (Fuente: _generador/recursos/css/ibero.css — build.js la copia al sitio)
+
+   ÍNDICE
+   01. Paleta de marca (variables de la plantilla)
+   02. Colores fijos de la plantilla
+   03. Detalles de marca (selección, subtítulos, botones)
+   04. Precarga
+   05. Cabecera y menús
+   06. Hero de portada
+   07. Iconos de fuente dentro de las cajas de la plantilla
+   08. Fotos reales en los bloques de imagen de la plantilla
+   09. Banda de título (migas)
+   10. Presentación de página (intro)
+   11. Contenido migrado (texto, listas, figuras, tablas)
+   12. Secciones de prosa e imágenes
+   13. Tarjetas (campus, eventos, noticias, membresías)
+   14. Equipo / contactos
+   15. Logos de miembros
+   16. Llamadas a la acción
+   17. Noticias: filtros
+   18. Buscador y 404
+   19. Pie
+   20. Botón flotante de WhatsApp
+   21. Animaciones: red de seguridad y accesibilidad
+   =================================================================== */
+
+/* ------------------------------------------------------------------
+   01. Paleta de marca
+   Azul marino, rojo y oro del logotipo y el emblema de Ibero Chamber.
+   ------------------------------------------------------------------ */
+:root {
+    --theme-color: #C8102E;        /* rojo bandera (flecha del logo)   */
+    --theme-color2: #F5B301;       /* oro (estela del logo)            */
+    --title-color: #0E1E4A;        /* azul marino del logotipo         */
+    --title-color2: #13306B;
+    --title-color3: #0A1633;
+    --title-color4: #0E1E4A;
+    --body-color: #4F5D73;
+    --smoke-color: #F2F5FB;        /* gris azulado (antes rosa)        */
+    --smoke-color2: #F8FAFE;
+    --smoke-color3: #FBF6EA;       /* crema dorada                     */
+    --black-color: #0E1E4A;
+    --black-color2: #1B2A55;
+    --black-color8: #0A1633;
+    --yellow-color: #F5B301;
+    --th-border-color: #D6DEEA;
+    --th-border-color2: #E8EDF5;
+
+    /* propios de la marca */
+    --ic-oro-linea: linear-gradient(90deg, #C8102E 0%, #E8601C 45%, #F5B301 100%);
+    --ic-azul: #1B3F8B;
+    --ic-sombra: 0 18px 50px rgba(14, 30, 74, .12);
+    --ic-radio: 14px;
+}
+
+/* ------------------------------------------------------------------
+   02. Colores fijos de la plantilla (no usaban variables)
+   ------------------------------------------------------------------ */
+.widget_info,
+.contact-feature .box-icon,
+.team-area,
+.why-bg,
+.faculty-area,
+.top-rated,
+.process-area,
+.feature-card,
+.banner-area-1,
+.community-card2:nth-child(4) .community-icon,
+.accordion-card.style3 .accordion-button:not(.collapsed)::after { background-color: var(--smoke-color); }
+.th-mobile-menu ul li { border-bottom-color: #E3E9F3; }
+.th-mobile-menu ul li li:first-child { border-top-color: #E3E9F3; }
+.counter-card3, .testi-card2 { background-color: var(--title-color); }
+.team-author .box-content { background: var(--theme-color); }
+.testi-card .rating,
+.program-details .program-blockquote cite,
+.program-details .program-blockquote span { color: var(--title-color); }
+.bg-smoke { background-color: var(--smoke-color) !important; }
+.bg-title { background-color: var(--title-color) !important; }
+
+/* ------------------------------------------------------------------
+   03. Detalles de marca
+   ------------------------------------------------------------------ */
+::selection { background: var(--theme-color); color: #fff; }
+.sub-title { color: var(--theme-color); letter-spacing: .08em; }
+.title-area .sec-title { text-wrap: balance; }
+.text-theme { color: var(--theme-color2) !important; }
+
+/* ------------------------------------------------------------------
+   04. Precarga
+   ------------------------------------------------------------------ */
+.preloader-inner img { width: 150px; height: auto; margin-bottom: 18px !important; }
+.preloader .loader { font-size: 52px; }
+@media (max-width: 767px) { .preloader .loader { font-size: 34px; } .preloader-inner img { width: 110px; } }
+
+/* ------------------------------------------------------------------
+   05. Cabecera y menús
+   ------------------------------------------------------------------ */
+.header-logo img, .mobile-logo img { height: 56px; width: auto; max-width: 100%; object-fit: contain; }
+.header-layout1 .header-logo img { max-width: 270px; height: 58px; }
+.mobile-logo img { height: 48px; }
+.sidemenu-wrapper .about-logo img { height: 52px; width: auto; }
+
+/* Layout 2 (interiores): el logo va en negativo sobre la franja azul marino */
+.header-layout2 .menu-area::before { background-color: var(--title-color); }
+.header-layout2 .menu-area::after {
+    content: ""; position: absolute; left: 0; bottom: 0; height: 3px;
+    width: var(--shape-width); background: var(--ic-oro-linea); z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 99% 100%, 0 100%);
+}
+.header-layout2 .header-logo { max-width: none; }
+.header-layout2 .header-logo img { max-width: 230px; height: 50px; }
+@media (max-width: 575px) { .header-layout2 .header-logo img { max-width: 170px; height: 40px; } }
+
+/* El menú real tiene 8 entradas (la plantilla tenía 7): se compacta. */
+.main-menu > ul > li > a, .main-menu .sub-menu a, .th-mobile-menu a { text-transform: none; }
+@media (min-width: 1200px) and (max-width: 1599px) {
+    .main-menu > ul > li { margin: 0 7px !important; }
+    .main-menu > ul > li > a { font-size: 15px; }
+    .header-layout1 .header-button .th-btn { padding: 16px 20px; }
+    .header-layout1 .search-form input { width: 140px; }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .main-menu > ul > li { margin: 0 6px !important; }
+    .main-menu > ul > li > a { font-size: 14px; }
+    .header-layout2 .header-logo img { max-width: 190px; }
+    .header-layout2 .header-action { display: none; }
+    .header-layout1 .header-button .th-btn { display: none; }
+}
+/* Portada: al fijarse la cabecera aparece el logo; el buscador pasa a icono */
+.ic-buscar-fijo { display: none !important; }
+@media (min-width: 1200px) and (max-width: 1599px) {
+    .header-layout1 .sticky .search-form { display: none; }
+    .header-layout1 .sticky .ic-buscar-fijo { display: inline-flex !important; align-items: center; justify-content: center; }
+    .header-layout1 .sticky .header-logo img { height: 46px; max-width: 220px; }
+}
+.main-menu ul.sub-menu { min-width: 280px; }
+.main-menu ul.sub-menu li a { font-size: 15px; line-height: 1.4; }
+.main-menu > ul > li.active > a,
+.main-menu > ul > li.active.menu-item-has-children > a:after { color: var(--theme-color) !important; }
+.header-top .ic-lema { font-family: var(--subtitle-font); font-weight: 600; letter-spacing: .04em; }
+/* Móvil: barra superior en una sola línea y logo que deja sitio al botón de menú */
+@media (max-width: 575px) {
+    .header-top .header-right-wrap li:first-child { display: none; }
+    .header-top { padding: 6px 0; }
+    .header-layout1 .header-logo img { height: 42px; max-width: 200px; }
+    .header-layout1 .menu-area { padding: 10px 0; }
+    .header-layout1 .menu-area .row { flex-wrap: nowrap; }
+    .ic-hero-sub { font-size: 11px; letter-spacing: .08em; padding: 6px 12px; line-height: 1.5; }
+}
+.header-layout1 .header-info-title a { word-break: break-word; }
+
+/* ------------------------------------------------------------------
+   06. Hero de portada
+   ------------------------------------------------------------------ */
+.hero-1 .th-hero-bg::before {
+    background: linear-gradient(90deg, rgba(10, 22, 51, .92) 0%, rgba(14, 30, 74, .78) 42%, rgba(14, 30, 74, .25) 100%);
+}
+.hero-1 .th-hero-bg::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 6px; background: var(--ic-oro-linea);
+}
+.ic-hero-sub {
+    display: inline-block; margin-bottom: 22px; padding: 8px 18px 8px 16px;
+    font-family: var(--subtitle-font); font-weight: 700; font-size: 14px; letter-spacing: .12em; text-transform: uppercase;
+    color: #fff; border-left: 4px solid var(--theme-color2); background: rgba(255, 255, 255, .08);
+}
+.hero-style1 .hero-title { text-wrap: balance; }
+/* La plantilla pega el texto al borde entre 1200 y 1700 px */
+@media (min-width: 1200px) and (max-width: 1699px) {
+    .hero-1 .th-container2, .header-layout1 .th-container2 { padding-left: 40px; padding-right: 40px; }
+}
+.ic-hero-emblema img {
+    width: min(420px, 100%); height: auto;
+    filter: drop-shadow(0 25px 45px rgba(0, 0, 0, .45));
+    animation: ic-flotar 6s ease-in-out infinite;
+}
+@keyframes ic-flotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+/* ------------------------------------------------------------------
+   07. Iconos de fuente (Font Awesome) donde la plantilla usaba SVG
+   ------------------------------------------------------------------ */
+.ic-icono {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 76px; height: 76px; border-radius: 50%;
+    background: #fff; color: var(--theme-color); font-size: 32px;
+    box-shadow: 0 10px 30px rgba(14, 30, 74, .1);
+    transition: .4s ease-in-out;
+}
+.feature-card:hover .ic-icono, .counter-card:hover .ic-icono { background: var(--theme-color); color: #fff; transform: rotateY(180deg); }
+.counter-card .ic-icono { background: rgba(255, 255, 255, .08); color: var(--theme-color2); box-shadow: none; border: 1px solid rgba(255, 255, 255, .2); }
+.about-feature .ic-icono-sm { font-size: 30px; color: var(--theme-color); }
+.about-feature .ic-icono-sm i { position: relative; z-index: 2; transition: .4s; }
+.about-feature:hover .ic-icono-sm i { color: #fff; }
+.price-left .icon i { font-size: 30px; color: var(--theme-color2); }
+
+/* ------------------------------------------------------------------
+   08. Fotos reales en los bloques de imagen de la plantilla
+   (los marcadores de la plantilla tenían tamaño fijo; las fotos no)
+   ------------------------------------------------------------------ */
+.img-box1 .img1 img { width: 100%; height: 600px; object-fit: cover; object-position: center top; }
+.img-box1 .img2 img { height: 288px; object-fit: cover; }
+.img-box1 .about-wrapp .logo, .discount-wrapp .logo { background-color: var(--title-color); overflow: hidden; }
+@media (min-width: 1200px) and (max-width: 1499px) { .img-box1 .about-wrapp { left: -40px; } }
+.discount-wrapp .logo img { width: 74px; height: 74px; object-fit: contain; vertical-align: middle; }
+.discount-wrapp { background: #fff; box-shadow: var(--ic-sombra); }
+@media (max-width: 1199px) { .img-box1 .img1 img { height: 480px; } }
+@media (max-width: 575px) { .img-box1 .img1 img { height: 360px; } .img-box1 .img2 img { height: 200px; } }
+
+.faq-imgbox img { object-fit: cover; }
+.faq-imgbox .img1 img { height: 260px; width: 260px; }
+.faq-imgbox .img2 img { height: 536px; width: 300px; }
+
+.apply-stadum-thumb img { width: 100%; height: 620px; object-fit: cover; }
+@media (max-width: 1199px) { .apply-stadum-thumb img { height: 440px; } }
+
+.why-video-bg img { object-position: center top; }
+.why-video.ic-pegajosa { position: sticky; top: 110px; height: auto; }
+.why-video.ic-pegajosa .why-video-bg { height: 640px; margin-right: 0; border-radius: var(--ic-radio); }
+@media (max-width: 1199px) { .why-video.ic-pegajosa .why-video-bg { height: 420px; } }
+
+.academic-card .academic-img img { width: 100%; height: 260px; object-fit: cover; }
+.academic-card .academic-meta .subject { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; }
+
+/* ------------------------------------------------------------------
+   09. Banda de título (migas)
+   ------------------------------------------------------------------ */
+.breadcumb-wrapper { background-color: var(--smoke-color); }
+.breadcumb-banner::before { background: linear-gradient(90deg, rgba(14, 30, 74, .55), rgba(14, 30, 74, .1)); }
+.breadcumb-banner img { object-position: center 30%; }
+.breadcumb-title { text-transform: none; text-wrap: balance; }
+.breadcumb-wrapper::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 4px; background: var(--ic-oro-linea); z-index: 3; }
+@media (max-width: 1399px) { .breadcumb-wrapper .breadcumb-content { max-width: 440px; } .breadcumb-title { font-size: 36px; } }
+@media (max-width: 767px) { .breadcumb-title { font-size: 30px; } }
+
+/* ------------------------------------------------------------------
+   10. Presentación de página (intro con foto y sello giratorio)
+   ------------------------------------------------------------------ */
+.ic-intro-img { position: relative; padding: 0 0 40px 40px; }
+.ic-intro-img::before {
+    content: ""; position: absolute; left: 0; bottom: 0; width: 70%; height: 70%;
+    border: 2px solid var(--theme-color2); border-radius: var(--ic-radio); z-index: 0;
+}
+.ic-intro-foto { position: relative; z-index: 1; border-radius: var(--ic-radio); overflow: hidden; box-shadow: var(--ic-sombra); }
+.ic-intro-foto img { width: 100%; height: 520px; object-fit: cover; }
+.ic-intro-img .about-wrapp { position: absolute; right: -20px; bottom: 0; z-index: 2; }
+@media (max-width: 1199px) { .ic-intro-foto img { height: 420px; } .ic-intro-img .about-wrapp { right: 10px; } }
+@media (max-width: 575px) { .ic-intro-img { padding: 0 0 30px 16px; } .ic-intro-foto img { height: 300px; } .ic-intro-img .about-wrapp { transform: scale(.75); transform-origin: right bottom; } }
+
+/* ------------------------------------------------------------------
+   11. Contenido migrado del WordPress
+   ------------------------------------------------------------------ */
+.ic-contenido { font-size: 17px; line-height: 1.75; color: var(--body-color); }
+.ic-contenido > *:last-child { margin-bottom: 0; }
+.ic-contenido p { margin-bottom: 1.1em; }
+.ic-contenido strong { color: var(--title-color); font-weight: 700; }
+.ic-contenido a:not(.th-btn) { color: var(--theme-color); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+.ic-contenido a:not(.th-btn):hover { color: var(--title-color); }
+.ic-contenido h2, .ic-contenido h3, .ic-contenido h4, .ic-contenido .ic-subtitulo {
+    font-family: var(--title-font); color: var(--title-color); line-height: 1.3; margin: 1.6em 0 .6em;
+}
+.ic-contenido h2 { font-size: 30px; }
+.ic-contenido h3, .ic-contenido .ic-subtitulo { font-size: 25px; position: relative; padding-left: 18px; }
+.ic-contenido h3::before, .ic-contenido .ic-subtitulo::before {
+    content: ""; position: absolute; left: 0; top: .2em; bottom: .2em; width: 4px; border-radius: 3px; background: var(--ic-oro-linea);
+}
+.ic-contenido h4 { font-size: 21px; }
+.ic-contenido h5, .ic-contenido h6 { font-size: 17px; color: var(--title-color); margin: 1.2em 0 .5em; }
+.ic-contenido > h2:first-child, .ic-contenido > h3:first-child, .ic-contenido > .ic-subtitulo:first-child { margin-top: 0; }
+.ic-contenido .checklist { margin: 0 0 1.4em; }
+.ic-contenido .checklist li { font-size: 17px; line-height: 1.6; margin-bottom: 10px; }
+.ic-contenido ol { padding-left: 1.3em; margin-bottom: 1.4em; }
+.ic-contenido ol li { margin-bottom: 8px; padding-left: 4px; }
+.ic-contenido ol li::marker { color: var(--theme-color); font-weight: 700; }
+.ic-contenido img { max-width: 100%; height: auto; border-radius: var(--ic-radio); margin: 10px 0 24px; }
+.ic-contenido .ic-figura { margin: 10px 0 28px; }
+.ic-contenido .ic-figura figcaption { font-size: 14px; color: #7a869a; margin-top: 8px; }
+.ic-contenido blockquote { border-left: 4px solid var(--theme-color); background: var(--smoke-color); padding: 24px 28px; border-radius: 0 var(--ic-radio) var(--ic-radio) 0; }
+.ic-contenido .table { border-color: var(--th-border-color2); }
+.ic-contenido .ic-video { margin: 10px 0 28px; border-radius: var(--ic-radio); overflow: hidden; }
+/* Dentro del acordeón el color lo decide la plantilla (blanco en la tarjeta activa) */
+.faq-text.ic-contenido { color: inherit; font-size: 16px; line-height: 1.7; }
+.faq-text.ic-contenido strong, .faq-text.ic-contenido a:not(.th-btn) { color: inherit; }
+.ic-lectura { max-width: 860px; margin-left: auto; margin-right: auto; }
+.blog-single .ic-lectura { max-width: none; }
+
+/* ------------------------------------------------------------------
+   12. Secciones de prosa e imágenes
+   ------------------------------------------------------------------ */
+.ic-prosa-img .global-img { border-radius: var(--ic-radio); overflow: hidden; box-shadow: var(--ic-sombra); }
+.ic-prosa-img img { width: 100%; height: 480px; object-fit: cover; }
+.ic-pegajosa { position: sticky; top: 120px; }
+@media (max-width: 1199px) { .ic-prosa-img img { height: 380px; } .ic-pegajosa { position: static; } }
+@media (max-width: 575px) { .ic-prosa-img img { height: 260px; } }
+.ic-galeria-item { position: relative; border-radius: var(--ic-radio); overflow: hidden; box-shadow: var(--ic-sombra); }
+.ic-galeria-item img { width: 100%; height: 300px; object-fit: cover; }
+.ic-galeria-zoom {
+    position: absolute; inset: auto 16px 16px auto; width: 46px; height: 46px; border-radius: 50%;
+    display: grid; place-items: center; background: var(--theme-color); color: #fff; opacity: 0; transform: translateY(10px); transition: .3s;
+}
+.ic-galeria-item:hover .ic-galeria-zoom, .ic-galeria-zoom:focus-visible { opacity: 1; transform: none; color: #fff; }
+
+/* ------------------------------------------------------------------
+   13. Tarjetas
+   ------------------------------------------------------------------ */
+.campus-card { height: 100%; display: flex; flex-direction: column; }
+.campus-card .campus-content { flex: 1; }
+.campus-card .campus-img img { width: 100%; height: 250px; object-fit: cover; }
+.campus-card .th-btn { align-self: flex-start; }
+.event-card .event-card-img img { width: 100%; height: 100%; min-height: 240px; object-fit: cover; }
+.event-card .event-card-tag { background: var(--theme-color); }
+.blog-card .blog-img-box img { width: 100%; height: 260px; object-fit: cover; }
+.blog-card { height: 100%; }
+.blog-card .box-title { text-wrap: balance; }
+.blog-card .blog-date { background: var(--theme-color); }
+.price-item .box-img img { width: 100%; height: 100%; min-height: 260px; object-fit: cover; }
+.price-item .price-descrition .price { color: var(--theme-color); font-weight: 700; font-size: 1.25em; }
+.ic-precio-regular { font-size: 14px; color: #7a869a; margin: 6px 0 0; }
+.ic-para-quien { font-size: 15px; line-height: 1.6; margin: 0; }
+.feature-card .box-title { text-wrap: balance; }
+/* La plantilla da a cada tarjeta un pastel distinto (gris, lila, menta): se
+   alternan los dos tonos de la marca. */
+.feature-card_wrapp:nth-child(odd) .feature-card { background-color: var(--smoke-color); }
+.feature-card_wrapp:nth-child(even) .feature-card { background-color: var(--smoke-color3); }
+.ic-caracteristicas .feature-card { height: 100%; }
+
+/* ------------------------------------------------------------------
+   14. Equipo / contactos
+   ------------------------------------------------------------------ */
+.ic-equipo .instr-card .instr-img img { width: 100%; height: 440px; object-fit: cover; object-position: center 15%; }
+@media (max-width: 575px) { .ic-equipo .instr-card .instr-img img { height: 400px; } }
+.ic-correo { display: block; margin-top: 6px; font-size: 14px; color: var(--theme-color); word-break: break-all; }
+.ic-correo:hover { color: var(--title-color); }
+
+/* ------------------------------------------------------------------
+   15. Logos de miembros
+   ------------------------------------------------------------------ */
+.ic-logos-titulo { font-size: 22px; margin-bottom: 22px; display: flex; align-items: center; gap: 14px; }
+.ic-logos-titulo::after { content: ""; flex: 1; height: 2px; background: var(--ic-oro-linea); opacity: .5; }
+.ic-logo-card {
+    height: 130px; display: grid; place-items: center; padding: 18px; background: #fff;
+    border: 1px solid var(--th-border-color2); border-radius: var(--ic-radio); transition: .3s;
+}
+.ic-logo-card img { max-height: 92px; max-width: 100%; object-fit: contain; filter: grayscale(1); opacity: .8; transition: .3s; }
+.ic-logo-card:hover { box-shadow: var(--ic-sombra); border-color: transparent; }
+.ic-logo-card:hover img { filter: none; opacity: 1; }
+
+/* ------------------------------------------------------------------
+   16. Llamadas a la acción
+   ------------------------------------------------------------------ */
+/* community-area: tarjeta blanca de la plantilla sobre una foto real */
+.ic-comunidad { position: relative; isolation: isolate; background-position: center 35%; }
+.ic-comunidad::before {
+    content: ""; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, rgba(14, 30, 74, .55) 0%, rgba(14, 30, 74, .1) 70%);
+}
+.ic-comunidad .community-wrap { border-top: 5px solid transparent; border-image: var(--ic-oro-linea) 1; }
+.ic-comunidad .btn-wrap { gap: 12px; }
+.apply-stadum-area .sub-title { color: var(--theme-color2); }
+.ic-cta-botones .btn-wrap { gap: 14px; }
+
+/* ------------------------------------------------------------------
+   17. Noticias: filtros por categoría
+   ------------------------------------------------------------------ */
+.ic-filtros { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 0 0 50px; }
+.ic-filtros button {
+    border: 1px solid var(--th-border-color); background: #fff; color: var(--title-color);
+    font-family: var(--subtitle-font); font-weight: 600; font-size: 15px; padding: 10px 18px; border-radius: 40px; transition: .3s;
+}
+.ic-filtros button span { display: inline-block; min-width: 24px; margin-left: 6px; padding: 1px 7px; font-size: 12px; border-radius: 20px; background: var(--smoke-color); color: var(--theme-color); }
+.ic-filtros button:hover, .ic-filtros button.active { background: var(--title-color); color: #fff; border-color: var(--title-color); }
+.ic-filtros button.active span { background: var(--theme-color2); color: var(--title-color); }
+
+/* ------------------------------------------------------------------
+   18. Buscador y 404
+   ------------------------------------------------------------------ */
+.ic-buscador-form { display: flex; gap: 12px; margin-top: 10px; }
+.ic-buscador-form input {
+    flex: 1; height: 62px; padding: 0 24px; font-size: 17px; border: 1px solid var(--th-border-color);
+    border-radius: 40px; background: #fff; color: var(--title-color);
+}
+.ic-buscador-form input:focus { outline: 2px solid var(--theme-color2); outline-offset: 2px; }
+.ic-buscador-form .th-btn { border-radius: 40px; }
+@media (max-width: 575px) { .ic-buscador-form { flex-direction: column; } }
+.ic-buscador-estado { margin: 24px 0 14px; color: var(--body-color); font-weight: 600; }
+.ic-resultado {
+    display: block; padding: 22px 26px; margin-bottom: 14px; background: #fff; border: 1px solid var(--th-border-color2);
+    border-left: 4px solid var(--theme-color); border-radius: 0 var(--ic-radio) var(--ic-radio) 0; transition: .3s; color: var(--body-color);
+}
+.ic-resultado:hover { box-shadow: var(--ic-sombra); transform: translateY(-2px); color: var(--body-color); }
+.ic-resultado-seccion { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--theme-color); }
+.ic-resultado h3 { font-size: 22px; margin: 6px 0 8px; color: var(--title-color); }
+.ic-resultado p { margin: 0; font-size: 15px; }
+.ic-resultado mark { background: rgba(245, 179, 1, .35); color: inherit; padding: 0 2px; border-radius: 3px; }
+.ic-404-emblema { width: 220px; height: auto; margin-bottom: 30px; }
+.ic-404 .sub-title { display: block; }
+
+/* ------------------------------------------------------------------
+   19. Pie
+   ------------------------------------------------------------------ */
+.footer-wrapper { position: relative; isolation: isolate; }
+.footer-wrapper::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(180deg, rgba(10, 22, 51, .95), rgba(10, 22, 51, .985));
+}
+.footer-wrapper .footer-top { border-bottom: 1px solid rgba(255, 255, 255, .12); }
+.footer-logo img { height: 62px; width: auto; }
+.ic-emblema-pie { width: 86px; height: auto; }
+.footer-wrapper .widget_title { color: #fff; }
+.footer-wrapper .th-widget-about .about-text,
+.footer-wrapper .footer-info a,
+.footer-wrapper .widget_nav_menu a,
+.footer-wrapper .copyright-text,
+.footer-wrapper .footer-links a { color: rgba(255, 255, 255, .78); }
+.footer-wrapper .widget_nav_menu a:hover, .footer-wrapper .footer-info a:hover, .footer-wrapper .footer-links a:hover { color: var(--theme-color2); }
+.footer-wrapper .copyright-text a { color: var(--theme-color2); }
+.footer-wrapper .insta-thumb img { aspect-ratio: 1 / 1; object-fit: cover; }
+
+/* Marquesina: el emblema sustituye al icono de la plantilla */
+.marquee-card .color-masking img { width: 64px; height: auto; }
+@media (max-width: 767px) { .marquee-card .color-masking img { width: 40px; } }
+
+/* ------------------------------------------------------------------
+   20. Botón flotante de WhatsApp
+   ------------------------------------------------------------------ */
+.ic-whatsapp {
+    position: fixed; right: 30px; bottom: 100px; z-index: 99; width: 56px; height: 56px; border-radius: 50%;
+    display: grid; place-items: center; font-size: 28px; color: #fff; background: #25D366;
+    box-shadow: 0 10px 25px rgba(37, 211, 102, .45); transition: .3s;
+}
+.ic-whatsapp:hover { color: #fff; transform: scale(1.08); }
+.ic-whatsapp::after {
+    content: ""; position: absolute; inset: 0; border-radius: 50%; border: 2px solid #25D366;
+    animation: ic-pulso 2.2s ease-out infinite;
+}
+@keyframes ic-pulso { from { transform: scale(1); opacity: .8; } to { transform: scale(1.6); opacity: 0; } }
+
+/* ------------------------------------------------------------------
+   21. Animaciones: red de seguridad y accesibilidad
+   ------------------------------------------------------------------ */
+/* La plantilla no anima [data-ani] por debajo de 1200px pero lo deja en
+   opacity:0: en móvil el título del hero quedaba invisible. */
+@media (max-width: 1199px) {
+    [data-ani] { opacity: 1 !important; visibility: visible !important; transform: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+    [data-ani], .wow, .reveal { opacity: 1 !important; visibility: visible !important; transform: none !important; animation: none !important; }
+    .ic-hero-emblema img, .ic-whatsapp::after { animation: none; }
+}
+:focus-visible { outline: 2px solid var(--theme-color2); outline-offset: 3px; }

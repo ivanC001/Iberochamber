@@ -8,6 +8,20 @@ Redirect 301 /inicio/ /
 Redirect 301 /servicios/ferias-y-exposiciones/ /servicios/ferias-exposiciones-y-eventos/
 Redirect 301 /oficina-de-representacion-en-brasil/ /oficina-en-brasil/
 Redirect 301 /formacion/ /formacion-profesional/
+Redirect 301 /el-nuevo-empresario-hispano-en-ee-uu-oportunidades-reales-en-un-mercado-competitivo/ /el-nuevo-empresario-iberoamericano-en-ee-uu-oportunidades-reales-en-un-mercado-competitivo/
+Redirect 301 /educacion-empresarial-la-ventaja-competitiva-del-empresario-hispano-moderno/ /educacion-empresarial-la-ventaja-competitiva-del-empresario-iberoamericano-moderno/
+Redirect 301 /camara-de-empresarios-hispanos-en-los-estados-unidos/ /camara-de-empresarios-iberoamericanos-en-los-estados-unidos/
+Redirect 301 /formacion-profesional/programa-de-liderazgo-empresarial-para-hispanos-en-usa/ /formacion-profesional/programa-de-liderazgo-empresarial-para-iberoamericanos-en-usa/
+Redirect 301 /programa-de-liderazgo-empresarial-para-hispanos-en-usa/ /formacion-profesional/programa-de-liderazgo-empresarial-para-iberoamericanos-en-usa/
+Redirect 301 /formacion-profesional/observatorio-empresarial-hispano/ /formacion-profesional/observatorio-empresarial-iberoamericano/
+Redirect 301 /observatorio-empresarial-hispano/ /formacion-profesional/observatorio-empresarial-iberoamericano/
+Redirect 301 /marketing-estrategico-para-empresas-hispanas/ /marketing-estrategico-para-empresas-iberoamericanas/
+Redirect 301 /eventos/eventos-2026/ /eventos/eventos-2027/
+Redirect 301 /eventos-2026/ /eventos/eventos-2027/
+Redirect 301 /la-cultura-empresarial-en-estados-unidos-lo-que-todo-empresario-hispano-debe-entender-antes-de-hacer-negocios/ /la-cultura-empresarial-en-estados-unidos-lo-que-todo-empresario-iberoamericano-debe-entender-antes-de-hacer-negocios/
+Redirect 301 /cambios-fiscales-2026-lo-que-todo-empresario-hispano-debe-anticipar/ /cambios-fiscales-2027-lo-que-todo-empresario-iberoamericano-debe-anticipar/
+Redirect 301 /tendencias-de-mercado-en-ee-uu-oportunidades-clave-para-emprendedores-hispanos/ /tendencias-de-mercado-en-ee-uu-oportunidades-clave-para-emprendedores-iberoamericanos/
+Redirect 301 /eventos-clave-para-empresarios-hispanos-en-el-segundo-semestre-2026/ /eventos-clave-para-empresarios-iberoamericanos-en-el-segundo-semestre-2027/
 
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css application/javascript image/svg+xml

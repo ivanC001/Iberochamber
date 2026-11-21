@@ -82,6 +82,18 @@
 .bg-smoke { background-color: var(--smoke-color) !important; }
 .bg-title { background-color: var(--title-color) !important; }
 
+/* Máscaras de la plantilla. Abierto con doble clic (file://), el navegador bloquea las
+   máscaras hechas con imagen y el elemento DESAPARECE: la ficha del equipo quedaba sin
+   fondo (texto encima de la foto), la foto de la banda de título no se veía y los botones
+   perdían la flecha. Las de la tarjeta y la banda eran rectángulos (no recortaban nada):
+   se quitan. La flecha va como SVG incrustado, que carga también en file://. */
+.instr-card .box-content::before, .instr-card .box-content::after,
+.breadcumb-banner { -webkit-mask-image: none; mask-image: none; }
+.th-btn.th-icon::after {
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.99906 1.41406C7.99906 2.11026 8.68899 3.15206 9.38646 4.027C10.2846 5.15346 11.3565 6.13753 12.5864 6.88886C13.5078 7.45146 14.6267 7.99153 15.5255 7.99153M7.99906 14.5853C7.99906 13.8891 8.68899 12.8473 9.38646 11.9723C10.2846 10.8459 11.3565 9.8618 12.5864 9.11046C13.5078 8.54786 14.6267 8.0078 15.5255 8.0078M15.5255 7.99966H0.472656' stroke='white'/%3E%3C/svg%3E");
+            mask-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.99906 1.41406C7.99906 2.11026 8.68899 3.15206 9.38646 4.027C10.2846 5.15346 11.3565 6.13753 12.5864 6.88886C13.5078 7.45146 14.6267 7.99153 15.5255 7.99153M7.99906 14.5853C7.99906 13.8891 8.68899 12.8473 9.38646 11.9723C10.2846 10.8459 11.3565 9.8618 12.5864 9.11046C13.5078 8.54786 14.6267 8.0078 15.5255 8.0078M15.5255 7.99966H0.472656' stroke='white'/%3E%3C/svg%3E");
+}
+
 /* ------------------------------------------------------------------
    03. Detalles de marca
    ------------------------------------------------------------------ */
@@ -143,6 +155,68 @@
 .main-menu > ul > li.active > a,
 .main-menu > ul > li.active.menu-item-has-children > a:after { color: var(--theme-color) !important; }
 .header-top .ic-lema { font-family: var(--subtitle-font); font-weight: 600; letter-spacing: .04em; }
+
+/* Submenús de escritorio: panel del ancho de la barra. A la izquierda, una ficha azul
+   con el nombre de la sección, una frase y «Ver todo»; a la derecha, las opciones en
+   3 columnas, cada una con su icono (config.menu). */
+@media (min-width: 1200px) {
+    .header-layout1 .menu-wrapp,
+    .header-layout2 .menu-area > .container { position: relative; }
+    .main-menu > ul > li.menu-item-has-children { position: static; }
+    .main-menu > ul > li > ul.ic-panel {
+        left: 0; right: 0; width: auto; min-width: 0;
+        display: grid; grid-template-columns: minmax(250px, 300px) repeat(3, minmax(0, 1fr));
+        align-content: start; gap: 6px 12px; padding: 22px;
+        border-top: 3px solid var(--theme-color); border-radius: 0 0 18px 18px;
+        box-shadow: 0 30px 60px rgba(14, 30, 74, .18);
+    }
+    /* puente invisible entre la opción y el panel para que no se cierre al bajar el ratón */
+    .main-menu > ul > li > ul.ic-panel::before { content: ""; position: absolute; left: 0; right: 0; top: -18px; height: 18px; }
+    .main-menu > ul > li > ul.ic-panel > li { padding: 0; margin: 0 !important; }
+    .main-menu ul.ic-panel li a::before { display: none; }
+
+    /* ficha de presentación */
+    .main-menu ul.ic-panel .ic-panel-intro {
+        grid-column: 1; position: relative; overflow: hidden; isolation: isolate;
+        display: flex; flex-direction: column; align-items: flex-start; gap: 8px;
+        margin-right: 14px !important; padding: 26px 24px; border-radius: 14px;
+        background: linear-gradient(155deg, var(--title-color) 0%, var(--title-color2) 100%);
+    }
+    .main-menu ul.ic-panel .ic-panel-intro::after {
+        content: ""; position: absolute; right: -34px; bottom: -40px; width: 150px; height: 150px; z-index: -1;
+        background: url("../img/brand/ibero-chamber-emblema-240-blanco.png") center / contain no-repeat; opacity: .13;
+    }
+    .main-menu ul.ic-panel .ic-panel-intro::before {
+        content: ""; position: absolute; left: 0; right: 0; top: 0; height: 4px; background: var(--ic-oro-linea);
+    }
+    .ic-panel-sub { font-family: var(--subtitle-font); font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--theme-color2); }
+    .ic-panel-titulo { font-family: var(--title-font); font-size: 27px; line-height: 1.15; color: #fff; }
+    .ic-panel-texto { font-size: 14.5px; line-height: 1.55; color: rgba(255, 255, 255, .78); }
+    .main-menu ul.ic-panel .ic-panel-todo {
+        display: inline-flex; align-items: center; gap: 8px; margin-top: auto; padding: 0;
+        font-size: 15px; font-weight: 700; line-height: 1.4; color: var(--theme-color2); text-transform: none;
+    }
+    .main-menu ul.ic-panel .ic-panel-todo i { transition: transform .25s; }
+    .main-menu ul.ic-panel .ic-panel-todo:hover { color: #fff; padding: 0; }
+    .main-menu ul.ic-panel .ic-panel-todo:hover i { transform: translateX(4px); }
+
+    /* opciones con icono */
+    .main-menu ul.ic-panel .ic-panel-item { align-self: center; }
+    .main-menu ul.ic-panel .ic-panel-item > a {
+        display: flex; align-items: center; gap: 14px; padding: 12px 14px; border-radius: 12px;
+        font-size: 16px; font-weight: 600; line-height: 1.3; letter-spacing: 0; color: var(--title-color);
+        text-transform: none; transition: background-color .25s, color .25s;
+    }
+    .main-menu ul.ic-panel .ic-panel-item > a:hover,
+    .main-menu ul.ic-panel .ic-panel-item.ic-actual > a { padding-left: 14px; background: var(--smoke-color); color: var(--theme-color); }
+    .ic-panel-icono {
+        flex: 0 0 46px; height: 46px; display: grid; place-items: center; border-radius: 12px;
+        background: var(--smoke-color); color: var(--theme-color); font-size: 19px;
+        transition: background-color .25s, color .25s, transform .25s;
+    }
+    .ic-panel-item > a:hover .ic-panel-icono,
+    .ic-panel-item.ic-actual .ic-panel-icono { background: var(--theme-color); color: #fff; transform: rotate(-6deg); }
+}
 /* Móvil: barra superior en una sola línea y logo que deja sitio al botón de menú */
 @media (max-width: 575px) {
     .header-top .header-right-wrap li:first-child { display: none; }
@@ -325,15 +399,48 @@
    alternan los dos tonos de la marca. */
 .feature-card_wrapp:nth-child(odd) .feature-card { background-color: var(--smoke-color); }
 .feature-card_wrapp:nth-child(even) .feature-card { background-color: var(--smoke-color3); }
-.ic-caracteristicas .feature-card { height: 100%; }
+/* Portada, 4 tarjetas de beneficios: misma altura y botón «Ver más» siempre al pie
+   (video del cliente, 03:45). */
+.ic-caracteristicas .feature-card_wrapp { display: flex; }
+.ic-caracteristicas .feature-card { height: 100%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; }
+.ic-caracteristicas .feature-card .box-text { margin-bottom: 32px; }
+.ic-caracteristicas .feature-card .th-btn { margin-top: auto; }
+
+/* Portada, franja de cifras: todas alineadas arriba aunque un texto ocupe 3 líneas (06:22) */
+.counter-wrap1 { align-items: flex-start; }
+@media (max-width: 1199px) { .counter-wrap1 { align-items: stretch; } }
+
+/* Portada, slider de servicios: interlineado del título más cerrado que la separación
+   con el texto (06:50) y tarjetas de igual altura con «Descubrir» alineado (07:04). */
+.ic-servicios .swiper-slide { height: auto; }
+.ic-servicios .academic-card { height: 100%; display: flex; flex-direction: column; }
+.ic-servicios .academic-content { flex: 1; }
+.ic-servicios .academic-content .box-title { line-height: 1.25; margin: 0 0 14px; }
+.ic-servicios .academic-card .box-text { margin-top: 0; }
 
 /* ------------------------------------------------------------------
    14. Equipo / contactos
    ------------------------------------------------------------------ */
-.ic-equipo .instr-card .instr-img img { width: 100%; height: 440px; object-fit: cover; object-position: center 15%; }
-@media (max-width: 575px) { .ic-equipo .instr-card .instr-img img { height: 400px; } }
-.ic-correo { display: block; margin-top: 6px; font-size: 14px; color: var(--theme-color); word-break: break-all; }
+.ic-equipo .instr-card .instr-img { border-radius: var(--ic-radio); overflow: hidden; }
+.ic-equipo .instr-card .instr-img img { width: 100%; height: 360px; object-fit: cover; object-position: center 18%; }
+@media (max-width: 575px) { .ic-equipo .instr-card .instr-img img { height: 340px; } }
+.ic-correo { display: block; margin-top: 6px; font-size: 14px; color: var(--theme-color); word-break: normal; overflow-wrap: anywhere; }
 .ic-correo:hover { color: var(--title-color); }
+/* Ficha de la persona: caja blanca redondeada DEBAJO de la foto (apenas la monta 36 px),
+   para que no tape la cara y el texto sea siempre legible.
+   Al pasar el ratón la caja se vuelve roja y TODO el texto pasa a blanco
+   (antes el nombre quedaba azul y el correo rojo sobre el rojo). */
+.ic-equipo .instr-card { height: 100%; display: flex; flex-direction: column; }
+.ic-equipo .instr-card .box-content {
+    position: relative; bottom: auto; flex: 1;
+    width: auto; max-width: none; margin: -36px 16px 0; padding: 14px 14px 18px;
+}
+.instr-card .box-content::before, .instr-card .box-content::after { border-radius: 12px; }
+.instr-card .box-content::after { box-shadow: 0 14px 34px rgba(14, 30, 74, .12); }
+.instr-card .box-title { color: var(--title-color); font-size: 22px; line-height: 1.25; transition: color .3s; }
+.instr-card .instr-desig { color: #4F5D73; font-size: 15px; margin: 4px 0 6px; }
+.instr-card:hover .box-title, .instr-card:hover .ic-correo, .instr-card:hover .instr-desig { color: #fff; }
+.instr-card:hover .card-icon { color: var(--theme-color); }
 
 /* ------------------------------------------------------------------
    15. Logos de miembros
@@ -358,6 +465,11 @@
     background: linear-gradient(90deg, rgba(14, 30, 74, .55) 0%, rgba(14, 30, 74, .1) 70%);
 }
 .ic-comunidad .community-wrap { border-top: 5px solid transparent; border-image: var(--ic-oro-linea) 1; }
+/* Menos blanco en la tarjeta y el mismo margen arriba y abajo (video, 08:20) */
+.ic-comunidad .community-wrap { padding: 72px 72px; }
+.ic-comunidad .community-wrap .title-area { margin-bottom: 30px; }
+@media (max-width: 991px) { .ic-comunidad .community-wrap { padding: 56px 44px; } }
+@media (max-width: 575px) { .ic-comunidad .community-wrap { padding: 40px 26px; } }
 .ic-comunidad .btn-wrap { gap: 12px; }
 .apply-stadum-area .sub-title { color: var(--theme-color2); }
 .ic-cta-botones .btn-wrap { gap: 14px; }
@@ -407,6 +519,12 @@
     background: linear-gradient(180deg, rgba(10, 22, 51, .95), rgba(10, 22, 51, .985));
 }
 .footer-wrapper .footer-top { border-bottom: 1px solid rgba(255, 255, 255, .12); }
+/* Sin la foto tenue de fondo y sin el bloque vacío bajo «¿Tienes alguna consulta?» (08:45) */
+.footer-wrapper { background-color: var(--title-color3); background-image: none !important; }
+.footer-default .footer-top { padding: 46px 0; }
+.footer-wrapper .widget-area { padding-top: 70px; }
+@media (max-width: 1199px) { .footer-default .footer-top .row { --bs-gutter-y: 22px; } }
+@media (max-width: 991px) { .footer-wrapper .widget-area { padding-top: 50px; } }
 .footer-logo img { height: 62px; width: auto; }
 .ic-emblema-pie { width: 86px; height: auto; }
 .footer-wrapper .widget_title { color: #fff; }

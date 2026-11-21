@@ -51,8 +51,29 @@
        2. Año actual en el pie
        ------------------------------------------------------------- */
     function anioPie() {
+        // El cliente pidió 2027 como año del sitio (lista del 20/11/2026)
+        var anio = Math.max(2027, new Date().getFullYear());
         document.querySelectorAll('.ic-anio').forEach(function (el) {
-            el.textContent = new Date().getFullYear();
+            el.textContent = anio;
+        });
+    }
+
+    /* -------------------------------------------------------------
+       2b. Sello giratorio (.discount-anime)
+       main.js separa el texto en letras y la plantilla las gira 9° cada
+       una: solo caben 40. Con textos más largos las letras se montaban
+       («CONNE BEROCHAMBER»). Aquí se reparten en los 360° y se ajusta el
+       tamaño de letra al largo del texto.
+       ------------------------------------------------------------- */
+    function selloGiratorio() {
+        document.querySelectorAll('.discount-anime').forEach(function (sello) {
+            var letras = sello.querySelectorAll('span[class^="char"]');
+            if (!letras.length) return;
+            var paso = 360 / letras.length;
+            sello.style.fontSize = Math.max(11, Math.min(14, 14 * 40 / letras.length)) + 'px';
+            letras.forEach(function (letra, i) {
+                letra.style.transform = 'rotate(' + (paso * (i + 1)) + 'deg)';
+            });
         });
     }
 
@@ -189,6 +210,7 @@
     document.documentElement.classList.remove('no-js');
     navegacionLocal();
     anioPie();
+    selloGiratorio();
     compartir();
     filtroDesdeUrl();
     buscador();

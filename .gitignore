@@ -2,3 +2,5 @@
 Thumbs.db
 desktop.ini
 .DS_Store
+config.bat
+node_modules
